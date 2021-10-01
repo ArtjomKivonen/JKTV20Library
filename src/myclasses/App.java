@@ -42,5 +42,10 @@ public class App {
         authors2[0]=author2;
         book2.setAuthor(authors);
         book2.setPublishedYear(2007);
+        
+        Reader reader1 = new Reader();
+        reader1.setFname("Ivan");
+        reader1.setLname("Ivanov");
+        reader1.setPhone("556298426");
     }
 }
