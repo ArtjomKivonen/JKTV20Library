@@ -21,6 +21,7 @@ import java.util.Scanner;
 public class App {
     Book[] books = new Book[10];
     Reader[] readers = new Reader[3];
+    History[] histories = new History[30];
     Scanner scanner = new Scanner(System.in);
 
     public App() {
@@ -35,6 +36,8 @@ public class App {
             System.out.println("2:Вывести список книг");
             System.out.println("3:Добавить читателя");
             System.out.println("4:Список читателей");
+            System.out.println("5:Добавить запись о выдаче книги");
+            System.out.println("6:Просмотр истории");
             
             int task = scanner.nextInt();
             scanner.nextLine();
@@ -76,6 +79,25 @@ public class App {
                     break;
                 case 4:
                     System.out.println("Список читателей");
+                        for (int i = 0; i < readers.length; i++) {
+                            if(readers[i]!=null){
+                                System.out.println(readers[i].toString());
+                            }
+                        }
+    //                    System.out.println("Список книг: "+Arrays.toString(books));
+                    break;
+                case 5:
+                    System.out.println("Добавить запись о выдаче книги");
+                    for (int i = 0; i < histories.length; i++) {
+                        if (histories[i]==null) {
+                            histories[i] = addHistory();
+                            break;
+                        }
+                        
+                    }
+                        break;
+                case 6:
+                    System.out.println("Просмотр истории");
                         for (int i = 0; i < readers.length; i++) {
                             if(readers[i]!=null){
                                 System.out.println(readers[i].toString());
@@ -131,6 +153,22 @@ public class App {
         System.out.print("Введите телефон читателя:");
         reader.setPhone(scanner.nextLine());
         return reader;
+    }
+    
+    private History addHistory() {
+        History history = new History();
+        
+        System.out.println("Выберите книгу:");
+        System.out.println(Arrays.toString(books));
+//        int choosenbook=(scanner.nextInt());
+        for (int i = 0; i < books.length; i++) {
+            
+            
+        }
+        history.setBook(books[i]);
+        
+        return history;
+        
     }
             
 //        //System.out.println("Hello");
