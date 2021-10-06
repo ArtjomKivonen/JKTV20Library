@@ -20,6 +20,7 @@ import java.util.Scanner;
  */
 public class App {
     Book[] books = new Book[10];
+    Reader[] readers = new Reader[3];
     Scanner scanner = new Scanner(System.in);
 
     public App() {
@@ -32,7 +33,8 @@ public class App {
             System.out.println("0:Закончить программу");
             System.out.println("1:Добавить книгу");
             System.out.println("2:Вывести список книг");
-            
+            System.out.println("3:Добавить читателя");
+            System.out.println("4:Список читателей");
             
             int task = scanner.nextInt();
             scanner.nextLine();
@@ -52,14 +54,34 @@ public class App {
                     }
                     break;
                            
-                    case 2:
-                        System.out.println("Список книг");
+                case 2:
+                    System.out.println("Список книг");
                         for (int i = 0; i < books.length; i++) {
                             if(books[i]!=null){
-                            System.out.println(books[i].toString());
+                                System.out.println(books[i].toString());
                             }
                         }
-//                    System.out.println("Список книг: "+Arrays.toString(books));
+    //                    System.out.println("Список книг: "+Arrays.toString(books));
+                    break;
+                case 3:
+                    System.out.println("Добавление читателя");
+                    for (int i = 0; i < readers.length; i++) {
+                        if (readers[i]==null) {
+                            readers[i] = addReader();
+                            break;
+                        }
+                        
+                    }
+    //                    System.out.println("Список книг: "+Arrays.toString(books));
+                    break;
+                case 4:
+                    System.out.println("Список читателей");
+                        for (int i = 0; i < readers.length; i++) {
+                            if(readers[i]!=null){
+                                System.out.println(readers[i].toString());
+                            }
+                        }
+    //                    System.out.println("Список книг: "+Arrays.toString(books));
                     break;
 
             }
@@ -97,6 +119,18 @@ public class App {
         }
         book.setAuthor(authors);
         return book;
+    }
+    
+    private Reader addReader() {
+        Reader reader = new Reader();
+        
+        System.out.print("Введите имя читателя:");
+        reader.setFirstname(scanner.nextLine());
+        System.out.print("Введите фамилию читателя:");
+        reader.setLastname(scanner.nextLine());
+        System.out.print("Введите телефон читателя:");
+        reader.setPhone(scanner.nextLine());
+        return reader;
     }
             
 //        //System.out.println("Hello");
