@@ -3,16 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myclasses;
+package entity;
+
+import entity.Author;
+import java.util.Arrays;
 
 /**
  *
- * @author pupil
+ * @author Melnikov
  */
 public class Book {
     private String caption;
     private Author[] author;
     private int publishedYear;
+    
     public Book() {
     }
 
@@ -39,5 +43,15 @@ public class Book {
     public void setPublishedYear(int publishedYear) {
         this.publishedYear = publishedYear;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" 
+                + "caption=" + caption 
+                + ",\n author=" + Arrays.toString(author)
+                + ",\n publishedYear=" + publishedYear 
+                + "\n}";
+    }
+    
     
 }

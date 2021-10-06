@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myclasses;
+package entity;
 
 /**
  *
- * @author pupil
+ * @author Melnikov
  */
 public class Author {
     private String name;
@@ -15,6 +15,7 @@ public class Author {
     private int year;
     private int day;
     private int month;
+    
     public Author() {
     }
 
@@ -57,5 +58,17 @@ public class Author {
     public void setMonth(int month) {
         this.month = month;
     }
+
+    @Override
+    public String toString() {
+        return "Author{" 
+                + "name=" + name 
+                + ", lastname=" + lastname 
+                + ", year=" + year 
+                + ", day=" + day 
+                + ", month=" + month 
+                + '}';
+    }
+    
     
 }

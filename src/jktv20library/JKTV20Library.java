@@ -6,9 +6,10 @@
 package jktv20library;
 
 import myclasses.App;
+
 /**
  *
- * @author pupil
+ * @author Melnikov
  */
 public class JKTV20Library {
 
@@ -16,7 +17,6 @@ public class JKTV20Library {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         App app;
         app=new App();
         app.run();
