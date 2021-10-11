@@ -86,25 +86,25 @@ public class App {
                         }
     //                    System.out.println("Список книг: "+Arrays.toString(books));
                     break;
-                case 5:
-                    System.out.println("Добавить запись о выдаче книги");
-                    for (int i = 0; i < histories.length; i++) {
-                        if (histories[i]==null) {
-                            histories[i] = addHistory();
-                            break;
-                        }
-                        
-                    }
-                        break;
-                case 6:
-                    System.out.println("Просмотр истории");
-                        for (int i = 0; i < readers.length; i++) {
-                            if(readers[i]!=null){
-                                System.out.println(readers[i].toString());
-                            }
-                        }
-    //                    System.out.println("Список книг: "+Arrays.toString(books));
-                    break;
+//                case 5:
+//                    System.out.println("Добавить запись о выдаче книги");
+//                    for (int i = 0; i < histories.length; i++) {
+//                        if (histories[i]==null) {
+//                            histories[i] = addHistory();
+//                            break;
+//                        }
+//                        
+//                    }
+//                        break;
+//                case 6:
+//                    System.out.println("Просмотр истории");
+//                        for (int i = 0; i < readers.length; i++) {
+//                            if(readers[i]!=null){
+//                                System.out.println(readers[i].toString());
+//                            }
+//                        }
+//    //                    System.out.println("Список книг: "+Arrays.toString(books));
+//                    break;
 
             }
         }while("y".equals(repeat));
@@ -155,19 +155,21 @@ public class App {
         return reader;
     }
     
-    private History addHistory() {
-        History history = new History();
-        
-        System.out.println("Выберите книгу:");
-        System.out.println(Arrays.toString(books));
-//        int choosenbook=(scanner.nextInt());
-        for (int i = 0; i < books.length; i++) {
-            
-            
-        }
-        history.setBook(books[i]);
-        
-        return history;
+//    private History addHistory() {
+//        History history = new History();
+//        
+//        System.out.println("Выберите книгу:");
+//        System.out.println(Arrays.toString(books));
+////        int choosenbook=(scanner.nextInt());
+//        int bookchoose=scanner.nextInt();
+//        
+//        for (int i = 0; i < books.length; i++) {
+//            
+//            
+//        }
+//        history.setBook(books[i]);
+//        
+//        return history;
         
     }
             
