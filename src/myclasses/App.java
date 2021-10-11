@@ -37,6 +37,7 @@ public class App {
             System.out.println("4:Список читателей");
             System.out.println("5:Выдача книг");
             System.out.println("6:Просмотр истории");
+            System.out.println("6:Возврат книг");
             
             int task = scanner.nextInt();
             scanner.nextLine();
@@ -86,7 +87,7 @@ public class App {
     //                    System.out.println("Список книг: "+Arrays.toString(books));
                     break;
                 case 5:
-                    System.out.println("Выдача книг:");
+                    System.out.println("Выдача книг");
                     for (int i = 0; i < histories.length; i++) {
                         if (histories[i]==null) {
                             histories[i] = addHistory();
@@ -111,6 +112,14 @@ public class App {
 
     //                    System.out.println("Список книг: "+Arrays.toString(books));
                     break;
+                case 7:
+                    System.out.println("Возврат книг");
+                    printGivenBooks();
+                    System.out.println("Выберите возвращаемую книгу: ");
+                    int historyNumber = scanner.nextInt(); scanner.nextLine();
+                    Calendar c = new GregorianCalendar();
+                    histories[historyNumber-1].setReturnDate(c.getTime());
+                    break;            
 
             }
         }while("y".equals(repeat));
@@ -161,6 +170,21 @@ public class App {
         return reader;
     }
     
+    private void printGivenBooks(){
+        System.out.println("Список выданных книг: ");
+                    for (int i = 0; i < histories.length; i++) {
+                        if (histories[i]!=null && histories[i].getReturnDate() == null) {
+                            System.out.printf("%d. Книгу %s читает %s %s%n",
+                                        i+1,
+                                        histories[i].getBook().getCaption(),
+                                        histories[i].getReader().getFirstname(),
+                                        histories[i].getReader().getLastname()
+                                );                       
+                        }
+                    }    
+    }
+    
+    
     private History addHistory() {
         
         History history = new History();  
@@ -201,7 +225,7 @@ public class App {
         return history;
         
     }
-     
+
     
 }
     
