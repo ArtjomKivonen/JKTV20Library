@@ -9,10 +9,9 @@ import entity.Reader;
 import entity.Book;
 import entity.Author;
 import entity.History;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
+import java.util.Scanner; 
 
 /**
  *
@@ -36,7 +35,7 @@ public class App {
             System.out.println("2:Вывести список книг");
             System.out.println("3:Добавить читателя");
             System.out.println("4:Список читателей");
-            System.out.println("5:Добавить запись о выдаче книги");
+            System.out.println("5:Выдача книг");
             System.out.println("6:Просмотр истории");
             
             int task = scanner.nextInt();
@@ -86,25 +85,32 @@ public class App {
                         }
     //                    System.out.println("Список книг: "+Arrays.toString(books));
                     break;
-//                case 5:
-//                    System.out.println("Добавить запись о выдаче книги");
-//                    for (int i = 0; i < histories.length; i++) {
-//                        if (histories[i]==null) {
-//                            histories[i] = addHistory();
-//                            break;
-//                        }
-//                        
-//                    }
-//                        break;
-//                case 6:
-//                    System.out.println("Просмотр истории");
-//                        for (int i = 0; i < readers.length; i++) {
-//                            if(readers[i]!=null){
-//                                System.out.println(readers[i].toString());
-//                            }
-//                        }
-//    //                    System.out.println("Список книг: "+Arrays.toString(books));
-//                    break;
+                case 5:
+                    System.out.println("Выдача книг:");
+                    for (int i = 0; i < histories.length; i++) {
+                        if (histories[i]==null) {
+                            histories[i] = addHistory();
+                            break;
+                        }
+                        
+                    }
+                        break;
+                case 6:
+                    System.out.println("Просмотр истории");
+                        for (int i = 0; i < histories.length; i++) {
+                            if(histories[i]!=null){
+                                System.out.printf("%d. Книгу %s читает %s %s%n",
+                                        i+1,
+                                        histories[i].getBook().getCaption(),
+                                        histories[i].getReader().getFirstname(),
+                                        histories[i].getReader().getLastname()
+                                );
+                                
+                            }
+                        }
+
+    //                    System.out.println("Список книг: "+Arrays.toString(books));
+                    break;
 
             }
         }while("y".equals(repeat));
@@ -155,65 +161,47 @@ public class App {
         return reader;
     }
     
-//    private History addHistory() {
-//        History history = new History();
-//        
-//        System.out.println("Выберите книгу:");
-//        System.out.println(Arrays.toString(books));
-////        int choosenbook=(scanner.nextInt());
-//        int bookchoose=scanner.nextInt();
-//        
-//        for (int i = 0; i < books.length; i++) {
-//            
-//            
-//        }
-//        history.setBook(books[i]);
-//        
-//        return history;
+    private History addHistory() {
+        
+        History history = new History();  
+        /**
+         * 1. Вевести нумерованный список книг.
+         * 2. Получить от пользователя номер выбранной книги:bookNumber
+         * 3. Вывести список читателей
+         * 4. Получить от пользователя номер читателя:readerNumber
+         * 5. В history инициировать поле book обьектом, который лежит в массиве books[bookNumber-1].
+         * 6. В history инициировать поле reader обьектом, который лежит в массиве readers[bookNumber-1].
+         * 7. Получить текущую дату и положить её в поле history.givenDate
+         * 
+         */
+        System.out.println("Cписок книг:");
+                        for (int i = 0; i < books.length; i++) {
+                            if(books[i]!=null){
+                                System.out.printf("%d. %s%n",i+1,books[i].toString());
+                            }
+                        }
+        System.out.println("Введите номер книги:");
+        int bookNumber=scanner.nextInt(); scanner.nextLine();
+        history.setBook(books[bookNumber-1]);
+
+            
+        System.out.println("Cписок читателей:");
+                        for (int i = 0; i < readers.length; i++) {
+                            if(readers[i]!=null){
+                                System.out.printf("%d. %s%n",i+1,readers[i].toString());
+                            }
+                        }
+        System.out.println("Введите номер читателя:");
+        int readerNumber=scanner.nextInt(); scanner.nextLine();
+        history.setReader(readers[readerNumber-1]); 
+        Calendar c = new GregorianCalendar();
+        history.setGivenDate(c.getTime());
+        
+        
+        return history;
         
     }
-            
-//        //System.out.println("Hello");
-//        Book book1 = new Book();
-//        book1.setCaption("Voina i Mir");
-//        Author author1 = new Author();
-//        author1.setName("Lev");
-//        author1.setLastname("Tolstoy");
-//        author1.setYear(1828);
-//        author1.setDay(9);
-//        author1.setMonth(9);
-//        Author[] authors = new Author[1];
-//        authors[0]=author1;
-//        book1.setAuthor(authors);
-//        book1.setPublishedYear(2005);
-//        Book book2 = new Book();
-//        book2.setCaption("Otsi i deti");
-//        Author author2 = new Author();
-//        author2.setName("Ivan");
-//        author2.setLastname("Turgenev");
-//        author2.setDay(9);
-//        author2.setMonth(11);
-//        author2.setYear(1818);
-//        Author[] authors2 = new Author[1];
-//        authors2[0]=author2;
-//        book2.setAuthor(authors2);
-//        book2.setPublishedYear(2007);
-//        
-//        Reader reader1 = new Reader();
-//        reader1.setFirstname("Ivan");
-//        reader1.setLastname("Ivanov");
-//        reader1.setPhone("4564545345");
-//        
-//        History history1 = new History();
-//        history1.setBook(book1);
-//        history1.setReader(reader1);
-//        Calendar c = new GregorianCalendar();
-//        history1.setGivenDate(c.getTime());
-//        System.out.println("history1 = "+history1.toString());
-//        System.out.println(" --------------- ");
-//        history1.setReturnDate(c.getTime());
-//        System.out.println("history1 = "+history1.toString());
-//        
+     
     
 }
     
