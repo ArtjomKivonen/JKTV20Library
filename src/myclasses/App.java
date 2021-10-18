@@ -55,7 +55,7 @@ public class App {
                 case 1: 
                     System.out.println("Добавление книги: ");
                     books.add(addBook());
-                    fileKeeper
+                    fileKeeper.saveBooks(books);
                     break;
                 case 2: 
                     System.out.println("Список книг: ");

@@ -64,7 +64,7 @@ public class FileKeeper implements Keeping{
     }
 
     @Override
-    public void saveReaders() {
+    public void saveReaders(List<Reader> readers) {
         
     }
 
@@ -76,7 +76,7 @@ public class FileKeeper implements Keeping{
     }
 
     @Override
-    public void saveHistories() {
+    public void saveHistories(List<History> histories) {
         
     }
 
