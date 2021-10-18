@@ -6,6 +6,7 @@
 package interfaces;
 
 import entity.Book;
+import entity.History;
 import entity.Reader;
 import java.util.List;
 
@@ -14,10 +15,10 @@ import java.util.List;
  * @author pupil
  */
 public interface Keeping {
-    public void saveBooks();
+    public void saveBooks(List<Book> books);
     public List<Book> loadBooks();
-    public void saveReaders();
+    public void saveReaders(List<Reader> readers);
     public List<Reader> loadReaders();
-    public void saveHistories();
+    public void saveHistories(List<History> histories);
     public List<History> loadHistories();
 }
