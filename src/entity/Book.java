@@ -7,6 +7,7 @@ package entity;
 
 import entity.Author;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -51,6 +52,10 @@ public class Book {
                 + ",\n author=" + Arrays.toString(author)
                 + ",\n publishedYear=" + publishedYear 
                 + "\n}";
+    }
+
+    public void setAuthor(List<Author> authors) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

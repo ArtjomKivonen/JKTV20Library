@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JKTV20/JKTV20Library/src/myclasses/App.java</file>
-            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JKTV20/JKTV20Library/src/entity/Reader.java</file>
             <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JKTV20/JKTV20Library/src/jktv20library/JKTV20Library.java</file>
-            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JKTV20/JKTV20Library/src/entity/History.java</file>
+            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JKTV20/JKTV20Library/src/entity/Book.java</file>
+            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JKTV20/JKTV20Library/src/myclasses/App.java</file>
         </group>
     </open-files>
 </project-private>
