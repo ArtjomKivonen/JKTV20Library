@@ -19,5 +19,5 @@ public interface Keeping {
     public void saveReaders();
     public List<Reader> loadReaders();
     public void saveHistories();
-    public List<Book> loadHistories();
+    public List<History> loadHistories();
 }

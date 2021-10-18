@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
+import keeper.FileKeeper;
 
 /**
  *
@@ -24,8 +25,11 @@ public class App {
     List<Book> books = new ArrayList<>();
     List<Reader> readers = new ArrayList<>();
     List<History> histories = new ArrayList<>();
+    FileKeeper fileKeeper = new FileKeeper();
 
     public App() {
+
+        books = fileKeeper.loadBooks();
     }
     
     public void run(){
@@ -51,6 +55,7 @@ public class App {
                 case 1: 
                     System.out.println("Добавление книги: ");
                     books.add(addBook());
+                    fileKeeper
                     break;
                 case 2: 
                     System.out.println("Список книг: ");

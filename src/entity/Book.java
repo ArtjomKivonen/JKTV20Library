@@ -54,9 +54,7 @@ public class Book {
                 + "\n}";
     }
 
-    public void setAuthor(List<Author> authors) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
     
     
 }
