@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Melnikov
+ * @author pupil
  */
 public class Book implements Serializable {
     private String caption;

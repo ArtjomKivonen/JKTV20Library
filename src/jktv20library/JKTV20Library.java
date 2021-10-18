@@ -9,7 +9,7 @@ import myclasses.App;
 
 /**
  *
- * @author Melnikov
+ * @author pupil
  */
 public class JKTV20Library {
 

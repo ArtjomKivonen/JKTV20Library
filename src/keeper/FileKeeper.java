@@ -65,7 +65,18 @@ public class FileKeeper implements Keeping{
 
     @Override
     public void saveReaders(List<Reader> readers) {
-        
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+        try {
+            fos = new FileOutputStream("books");
+            oos = new ObjectOutputStream(oos);
+            oos.writeObject(readers);
+            oos.flush();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileKeeper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FileKeeper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
