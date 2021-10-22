@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class Book implements Serializable {
     private String caption;
-    private Author[] author;
+    private List<Author> author;
     private int publishedYear;
     
     public Book() {
@@ -30,11 +30,11 @@ public class Book implements Serializable {
         this.caption = caption;
     }
 
-    public Author[] getAuthor() {
+    public List<Author> getAuthor() {
         return author;
     }
-
-    public void setAuthor(Author[] author) {
+     
+    public void setAuthor(List<Author> author) {
         this.author = author;
     }
 
@@ -50,14 +50,14 @@ public class Book implements Serializable {
     public String toString() {
         return "Book{" 
                 + "caption=" + caption 
-                + ",\n author=" + Arrays.toString(author)
+                + ",\n author=" + Arrays.toString(author.toArray())
                 + ",\n publishedYear=" + publishedYear 
                 + "\n}";
     }
 
-    public void setAuthor(List<Author> authors) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
+
+
 
 
     

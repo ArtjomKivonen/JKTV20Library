@@ -5,13 +5,14 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author Melnikov
  */
-public class History {
+public class History implements Serializable{
     private Book book;
     private Reader reader;
     private Date givenDate;
