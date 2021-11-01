@@ -7,6 +7,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -61,6 +62,43 @@ public class History implements Serializable{
                 + ",\n givenDate=" + givenDate.toString()
                 + ",\n returnDate=" + returnDate
                 + "\n}";
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.book);
+        hash = 71 * hash + Objects.hashCode(this.reader);
+        hash = 71 * hash + Objects.hashCode(this.givenDate);
+        hash = 71 * hash + Objects.hashCode(this.returnDate);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final History other = (History) obj;
+        if (!Objects.equals(this.book, other.book)) {
+            return false;
+        }
+        if (!Objects.equals(this.reader, other.reader)) {
+            return false;
+        }
+        if (!Objects.equals(this.givenDate, other.givenDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.returnDate, other.returnDate)) {
+            return false;
+        }
+        return true;
     }
     
 }
