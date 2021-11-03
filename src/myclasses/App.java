@@ -53,8 +53,7 @@ public class App {
             System.out.println("6: Список выданных книг");
             System.out.println("7: Вернуть книгу");
             
-            int task = scanner.nextInt();
-            scanner.nextLine();
+            int task = getNumber();
             switch (task) {
                 case 0: 
                     repeat="q";
@@ -80,6 +79,9 @@ public class App {
                     break;
                 case 7: 
                     returnBook();
+                    break;
+                default:
+                    System.out.println("Выберите номер из списка задач");
                     break;
             }
         }while("y".equals(repeat));
@@ -112,6 +114,7 @@ public class App {
     }
     private void addHistory(){
         System.out.println("Выдача книги: ");
+        if(quit()) return;
         History history = new History();
         /**
          * 1. Вывести нумерованный список книг
@@ -125,28 +128,19 @@ public class App {
          * 7. Получить текущую дату и положить ее в поле history.givenDate
          * 
          */
-        Set<Integer> setNumbersBooks = new HashSet();
+        Set<Integer> setNumbersBooks = printListBooks();
         if(setNumbersBooks.isEmpty()){
             return;
         }
-        int bookNumber;
-        do{
-            System.out.print("Введите номер книги: ");
-            String strBookNumber = scanner.nextLine();
-            try {
-                bookNumber = Integer.parseInt(strBookNumber);
-            
-            } catch (Exception e) {
-                bookNumber = 0;
-            }
-            
-        }while(!setNumbersBooks.contains(bookNumber));
+        System.out.print("Введите номер книги из списка: ");
+        int bookNumber = insertNumber(setNumbersBooks);
+
         history.setBook(books.get(bookNumber-1));
         System.out.println();
         System.out.println("Список читателей: ");
-        printListReaders();
-        System.out.print("Введите номер читателя: ");
-        int readerNumber = scanner.nextInt(); scanner.nextLine();
+        Set<Integer> setNumbersReaders =  printListReaders();
+        int readerNumber = insertNumber(setNumbersReaders);
+
         history.setReader(readers.get(readerNumber-1));
         Calendar c = new GregorianCalendar();
         history.setGivenDate(c.getTime());
@@ -157,6 +151,7 @@ public class App {
     }
     private void addReader(){
         System.out.println("Добавление читателя: ");
+        if(quit()) return;
         Reader reader = new Reader();
         System.out.print("Введите имя читателя: ");
         reader.setFirstname(scanner.nextLine());
@@ -167,18 +162,27 @@ public class App {
         readers.add(reader);
         keeper.saveReaders(readers);
     }
+    
+    private boolean quit(){
+        System.out.println("Чтобы закончить операцию нажмите \"q\", для продолжения любой другой символ");
+        String quit = scanner.nextLine();
+        if("q".equals(quit)) return true;
+      return false;
+    }
     private void addBook(){
         System.out.println("Добавление книги: ");
+        if(quit()) return;
         Book book = new Book();
         System.out.print("Введите название книги: ");
         book.setCaption(scanner.nextLine());
         System.out.print("Введите год издания: ");
-        book.setPublishedYear(scanner.nextInt()); scanner.nextLine();
+        book.setPublishedYear(getNumber());
         System.out.print("Введите количество экземпляров книги: ");
-        book.setQuantity(scanner.nextInt()); scanner.nextLine();
+        book.setQuantity(getNumber());
+        book.setQuantity(getNumber());
         book.setCount(book.getQuantity());
         System.out.print("Сколько авторов у книги: ");
-        int countAuthors=scanner.nextInt(); scanner.nextLine();
+        int countAuthors=getNumber();
         List<Author> authors = new ArrayList<>();
         for (int i = 0; i < countAuthors; i++) {
             System.out.println("Добавление автора "+(i+1));
@@ -188,11 +192,11 @@ public class App {
             System.out.print("Фамилия автора: ");
             author.setLastname(scanner.nextLine());
             System.out.print("Год рождения автора: ");
-            author.setYear(scanner.nextInt());
+            author.setYear(getNumber());
             System.out.print("День рождения автора: ");
-            author.setDay(scanner.nextInt());
+            author.setDay(getNumber());
             System.out.print("Месяц рождения автора: ");
-            author.setMonth(scanner.nextInt()); scanner.nextLine();
+            author.setMonth(getNumber());
             authors.add(author);
         }
         book.setAuthor(authors);
@@ -201,9 +205,9 @@ public class App {
     }
 
     private Set<Integer> printListBooks() {
-       System.out.println("Список книг: ");
+        System.out.println("Список книг: ");
         books = keeper.loadBooks();
-        Set<Integer> setNumberBooks = new HashSet<>();
+        Set<Integer> setNumbersBooks = new HashSet<>();
         for (int i = 0; i < books.size(); i++) {
             StringBuilder cbAutors = new StringBuilder();
             for (int j = 0; j < books.get(i).getAuthor().size(); j++) {
@@ -219,8 +223,9 @@ public class App {
                         ,cbAutors.toString()
                         ,books.get(i).getCount()
                 );
+                setNumbersBooks.add(i+1);
             }else if(books.get(i) != null){
-                System.out.printf("%d. %s. %s Нет в наличии. Будет возвращена: %s%n"
+                System.out.printf("%d. %s. %s Нет наличии. Будет возварщена: %s%n"
                         ,i+1
                         ,books.get(i).getCaption()
                         ,cbAutors.toString()
@@ -228,57 +233,42 @@ public class App {
                 );
             }
         }
-        return setNumberBooks;
-        
+        return setNumbersBooks;
     }
-    
-    private String getReturnDate(Book book) {
-            
-        for(int i=0 ; i < histories.size(); i++){
-            if(book.getCaption().equals(histories.get(i).getBook().getCaption())){
-            
-               LocalDate localGivenDate = histories.get(i).getGivenDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-               localGivenDate = localGivenDate.plusDays(14);
-               return localGivenDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-               
-            }
-        }       
-       
+    private String getReturnDate(Book book){
         
-    
+        for (int i = 0; i < histories.size(); i++) {
+            if(book.getCaption().equals(histories.get(i).getBook().getCaption())){
+                LocalDate localGivenDate = histories.get(i).getGivenDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                localGivenDate = localGivenDate.plusDays(14);
+                return localGivenDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            }
+        }
         return "";
     }
-
-    private void printListReaders() {
+    private Set<Integer> printListReaders() {
+        Set<Integer> setNumbersReaders = new HashSet<>();
         System.out.println("Список читателей: ");
         for (int i = 0; i < readers.size(); i++) {
             if(readers.get(i) != null){
-                System.out.printf("%d. %s%n",i+1,readers.get(i).toString());
+                System.out.printf("%d. %s%n"
+                        ,i+1
+                        ,readers.get(i).toString()
+                );
+                setNumbersReaders.add(i+1);
             }
         }
+        return setNumbersReaders;
     }
 
     private void returnBook() {
         System.out.println("Вернуть книгу: ");
-        Set <Integer> numbersGivenBooks = printGivenBooks();
-        if(numbersGivenBooks.isEmpty()) {
+        if(quit()) return;
+        Set<Integer> numbersGivenBooks = printGivenBooks();
+        if(numbersGivenBooks.isEmpty()){
             return;
         }
-        
-        
-        int historyNumber;
-        do{
-            System.out.print("Выберите возвращаемую книгу: ");
-            String strHistoryNumber = scanner.nextLine();
-            try{
-                historyNumber = Integer.parseInt(strHistoryNumber);
-            } catch(Exception e) {
-                historyNumber = 0;
-            }
-               
-            
-        }
-        while(!numbersGivenBooks.contains(historyNumber));
+        int historyNumber = insertNumber(numbersGivenBooks);
         Calendar c = new GregorianCalendar();
         histories.get(historyNumber - 1).setReturnDate(c.getTime());
         // Здесь объясняется что значит передача по ссылке в Java
@@ -292,8 +282,27 @@ public class App {
         keeper.saveBooks(books);
         keeper.saveHistories(histories);
     }
-    
-    
+
+    private int getNumber() {
+        do{
+            try {
+                String strNumber = scanner.nextLine();
+                return Integer.parseInt(strNumber);
+            } catch (Exception e) {
+                System.out.println("Попробуй еще раз: ");
+            }
+        }while(true);
+    }
+
+    private int insertNumber(Set<Integer> setNumbers) {
+        do{
+            int historyNumber = getNumber();
+            if(setNumbers.contains(historyNumber)){
+                return historyNumber;
+            }
+            System.out.println("Попробуй еще раз: ");
+        }while(true);
+    }
     
 }
     
