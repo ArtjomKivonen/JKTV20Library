@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import keeper.BaseKeeper;
 import keeper.FileKeeper;
 
 /**
@@ -31,13 +32,13 @@ public class App {
     List<Book> books = new ArrayList<>();
     List<Reader> readers = new ArrayList<>();
     List<History> histories = new ArrayList<>();
-    Keeping keeper = new FileKeeper();
-    //Keeping keeper = new BaseKeeper();
+//    Keeping keeper = new FileKeeper();
+    Keeping keeper = new BaseKeeper();
 
     public App() {
         books = keeper.loadBooks();
-        readers = keeper.loadReaders();
-        histories = keeper.loadHistories();
+//        readers = keeper.loadReaders();
+//        histories = keeper.loadHistories();
     }
     
     public void run(){
@@ -179,8 +180,8 @@ public class App {
         book.setPublishedYear(getNumber());
         System.out.print("Введите количество экземпляров книги: ");
         book.setQuantity(getNumber());
-        book.setQuantity(getNumber());
-        book.setCount(book.getQuantity());
+        
+//        book.setCount(book.getQuantity());
         System.out.print("Сколько авторов у книги: ");
         int countAuthors=getNumber();
         List<Author> authors = new ArrayList<>();
