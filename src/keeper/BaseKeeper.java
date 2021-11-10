@@ -5,6 +5,7 @@
  */
 package keeper;
 
+import entity.Author;
 import entity.Book;
 import entity.History;
 import entity.Reader;
@@ -18,36 +19,48 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author pupil
+ * @author Melnikov
  */
 public class BaseKeeper implements Keeping{
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("JKTV20LibraryPU");
     private EntityManager em = emf.createEntityManager();
     private EntityTransaction tx = em.getTransaction();
-    
+
     @Override
     public void saveBooks(List<Book> books) {
-        
+        /* Истправление ошибки
+         * Возникала ошибка потому что мы пытались сохранить в базу объект book,
+         * который содержит массив объектов author. Т.к. объект автор записывается 
+         * в таблицу book_author по ссылке на поле id, а ведь author еще не сохранен
+         * в таблице и поэтому его id = null. Это и дает ошибку
+         * 
+         *  Исправление ошибки в том, что мы сначала добавляем в базу авторов книги,
+         * а потом книгу с этими авторами
+        */
         tx.begin();
             for (int i = 0; i < books.size(); i++) {
                 if(books.get(i).getId() == null){
+                    for (int j = 0; j < books.get(i).getAuthor().size(); j++) {
+                        Book get = books.get(j);
+                        Author author = books.get(i).getAuthor().get(j);
+                        em.persist(author);
+                    }
                     em.persist(books.get(i));
                 }
-        }
+            }
         tx.commit();
     }
 
     @Override
     public List<Book> loadBooks() {
-        List<Book> books = new ArrayList<>();
+        List<Book> books = null;
         try {
-            books = em.createQuery("SELECT book FROM Book book WHERE 1")
-                .getResultList();
+            books = em.createQuery("SELECT book FROM Book book")
+                    .getResultList();
         } catch (Exception e) {
-            return books = new ArrayList<>();
+            books = new ArrayList<>();
         }
         return books;
-        
     }
 
     @Override
