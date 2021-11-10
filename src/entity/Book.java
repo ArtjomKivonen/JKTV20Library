@@ -31,8 +31,7 @@ public class Book implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String caption;
-    @ElementCollection(fetch = FetchType.LAZY)
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     private List<Author> author;
     private int publishedYear;
     private int quantity;

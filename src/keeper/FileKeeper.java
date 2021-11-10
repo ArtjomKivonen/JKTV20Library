@@ -5,6 +5,7 @@
  */
 package keeper;
 
+import entity.Author;
 import entity.Book;
 import entity.History;
 import entity.Reader;
@@ -63,6 +64,44 @@ public class FileKeeper implements Keeping{
         return listBooks;
     }
 
+    @Override
+    public void saveAuthors(List<Author> authors) {
+    
+    
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+        try {
+            fos = new FileOutputStream("authors");
+
+                oos = new ObjectOutputStream(fos);
+                oos.writeObject(authors);
+                oos.flush();
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileKeeper.class.getName()).log(Level.SEVERE, "Нет файла books", ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FileKeeper.class.getName()).log(Level.SEVERE, "ошибка ввода", ex);
+        }
+    }
+
+    @Override
+    public List<Author> loadAuthors() {
+        List<Author> listAuthors = new ArrayList<>();
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        try {
+            fis = new FileInputStream("authors");
+            ois = new ObjectInputStream(fis);
+            listAuthors = (List<Author>) ois.readObject();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileKeeper.class.getName()).log(Level.SEVERE, "Нет файла books", ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FileKeeper.class.getName()).log(Level.SEVERE, "Ошибка ввода", ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FileKeeper.class.getName()).log(Level.SEVERE, "класс не обнаружен", ex);
+        }
+        return listAuthors;
+    }
     @Override
     public void saveReaders(List<Reader> readers) {
         FileOutputStream fos = null;
@@ -140,6 +179,7 @@ public class FileKeeper implements Keeping{
         
         return listHistories;
     }
+
 
     
 
