@@ -25,6 +25,8 @@ public class TabAddReaderComponents extends JPanel{
     private EditorComponent nameComponent;
     private EditorComponent lastNameComponent;
     private EditorComponent phoneComponent;
+    private EditorComponent loginComponent;
+    private EditorComponent passwordComponent;
     private ButtonComponent buttonComponent;
     public TabAddReaderComponents(int widthPanel) {
         setPreferredSize(new Dimension(GuiApp.WITH_WINDOWS-5,GuiApp.HEIGHT_WINDOWS));
@@ -36,7 +38,7 @@ public class TabAddReaderComponents extends JPanel{
     private void initComponents(int widthPanel) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(Box.createRigidArea(new Dimension(0,15)));
-        captionComponent = new CaptionComponent("Добавление новой читателя", widthPanel, 31);
+        captionComponent = new CaptionComponent("Регистрация нового читателя", widthPanel, 31);
         this.add(captionComponent); 
        infoComponent = new InfoComponent("", widthPanel, 31);
         this.add(infoComponent);
@@ -45,8 +47,12 @@ public class TabAddReaderComponents extends JPanel{
         this.add(nameComponent);
         lastNameComponent = new EditorComponent("Фамилия", widthPanel, 31, 300);
         this.add(lastNameComponent);
-        phoneComponent = new EditorComponent("Телефон", widthPanel, 31, 200);
+        phoneComponent = new EditorComponent("Телефон", widthPanel, 31, 240);
         this.add(phoneComponent);
+        loginComponent = new EditorComponent("Логин", widthPanel, 31, 200);
+        this.add(loginComponent);
+        passwordComponent = new EditorComponent("Пароль", widthPanel, 31, 200);
+        this.add(passwordComponent);
         buttonComponent = new ButtonComponent("Добавить читателя", widthPanel, 31, 350, 150);
         this.add(buttonComponent);
         buttonComponent.getButton().addActionListener(clickToButtonAddReader());
