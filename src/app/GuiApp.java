@@ -5,6 +5,8 @@
  */
 package app;
 
+import app.mycomopnents.ButtonComponent;
+import app.mycomopnents.EditorComponent;
 import app.mycomopnents.GuestButtonsComponent;
 import app.mycomopnents.GuestComponent;
 import app.mycomopnents.TabAddReaderComponents;
@@ -19,11 +21,14 @@ import facade.ReaderFacade;
 import facade.RoleFacade;
 import facade.UserFacade;
 import facade.UserRolesFacade;
+import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.BoxLayout;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -101,7 +106,25 @@ public class GuiApp extends JFrame{
         guestButtonsComponent.getButton1().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
+                JDialog dialogLogin = new JDialog(guiApp, "Введите логин и пароль", Dialog.ModalityType.DOCUMENT_MODAL);
+                dialogLogin.setPreferredSize(new Dimension(GuiApp.WITH_WINDOWS, GuiApp.HEIGHT));
+                dialogLogin.setMinimumSize(getPreferredSize());
+                dialogLogin.setMaximumSize(getPreferredSize());
+                dialogLogin.getContentPane().setLayout(new BoxLayout(dialogLogin.getContentPane(), BoxLayout.Y_AXIS));
+                dialogLogin.setLocationRelativeTo(null);
+                EditorComponent loginComponent= new EditorComponent("Login", GuiApp.WITH_WINDOWS, 27, 200);
+                EditorComponent passwordComponent= new EditorComponent("Password", GuiApp.WITH_WINDOWS, 27, 200);
+                ButtonComponent enterComponent = new ButtonComponent("login", GuiApp.WITH_WINDOWS, 50, 80, 150);
+                dialogLogin.getContentPane().add(loginComponent);
+                dialogLogin.getContentPane().add(passwordComponent);
+                dialogLogin.getContentPane().add(enterComponent);
                 
+                dialogLogin.pack();
+                dialogLogin.setVisible(true);
+                
+//                login.getContentPane().add(tabAddReaderComponents);
+//                login.pack();
+//                login.setVisible(true);
             }
         });
         guestButtonsComponent.getButton2().addActionListener(new ActionListener() {
@@ -112,6 +135,8 @@ public class GuiApp extends JFrame{
                 guiApp.getContentPane().add(tabAddReaderComponents);
                 guiApp.repaint();
                 guiApp.revalidate();
+                
+                
             }
         });
         this.add(guestComponent);
