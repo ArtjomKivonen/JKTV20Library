@@ -79,7 +79,7 @@ public class TabAddReaderComponents extends JPanel{
                 } 
                 reader.setPhone(phoneComponent.getEditor().getText());
                 
-                ReaderFacade readerFacade = new ReaderFacade(Reader.class);
+                ReaderFacade readerFacade = new ReaderFacade();
                 
                 try {
                     readerFacade.create(reader);

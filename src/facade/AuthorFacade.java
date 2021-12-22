@@ -17,8 +17,8 @@ public class AuthorFacade extends AbstractFacade<Author>{
    
     private EntityManager em;
     
-    public AuthorFacade(Class<Author> entityClass) {
-        super(entityClass);
+    public AuthorFacade() {
+        super(Author.class);
         Singleton singleton = Singleton.getInstance();
         em = singleton.getEntityManager();
     }

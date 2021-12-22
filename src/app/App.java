@@ -38,10 +38,10 @@ public class App {
 //    private List<Reader> readers = new ArrayList<>();
 //    private List<History> histories = new ArrayList<>();
 //    private List<Author> authors = new ArrayList<>();
-    private BookFacade bookFacade = new BookFacade(Book.class);
-    private ReaderFacade readerFacade = new ReaderFacade(Reader.class);
-    private AuthorFacade  authorFacade = new AuthorFacade(Author.class);
-    private HistoryFacade historyFacade = new HistoryFacade(History.class);
+    private BookFacade bookFacade = new BookFacade();
+    private ReaderFacade readerFacade = new ReaderFacade();
+    private AuthorFacade  authorFacade = new AuthorFacade();
+    private HistoryFacade historyFacade = new HistoryFacade();
 
 
     public App() {

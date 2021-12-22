@@ -25,6 +25,11 @@ public class User implements Serializable {
   private Long id;
   private String login;
   private String password;
+  private Reader reader;
+  
+  public User() {
+  }
+  
   public Long getId() {
     return id;
   }
@@ -49,12 +54,21 @@ public class User implements Serializable {
     this.password = password;
   }
 
+  public Reader getReader() {
+    return reader;
+  }
+
+  public void setReader(Reader reader) {
+    this.reader = reader;
+  }
+
   @Override
   public int hashCode() {
-    int hash = 5;
-    hash = 13 * hash + Objects.hashCode(this.id);
-    hash = 13 * hash + Objects.hashCode(this.login);
-    hash = 13 * hash + Objects.hashCode(this.password);
+    int hash = 7;
+    hash = 11 * hash + Objects.hashCode(this.id);
+    hash = 11 * hash + Objects.hashCode(this.login);
+    hash = 11 * hash + Objects.hashCode(this.password);
+    hash = 11 * hash + Objects.hashCode(this.reader);
     return hash;
   }
 
@@ -79,13 +93,24 @@ public class User implements Serializable {
     if (!Objects.equals(this.id, other.id)) {
       return false;
     }
+    if (!Objects.equals(this.reader, other.reader)) {
+      return false;
+    }
     return true;
   }
 
   @Override
   public String toString() {
-    return "User{" + "id=" + id + ", login=" + login + ", password=" + password + '}';
+    return "User{" 
+            + "id=" + id 
+            + ", login=" + login 
+            + ", password=" + password 
+            + ", reader=" + reader.getFirstname() 
+            + " " + reader.getLastname() 
+            + '}';
   }
+
+
 
 
   

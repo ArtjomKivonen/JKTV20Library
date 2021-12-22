@@ -92,7 +92,7 @@ public class TabEditReaderComponents extends JPanel{
                 } 
                 reader.setPhone(phoneComponent.getEditor().getText());
                 
-                ReaderFacade readerFacade = new ReaderFacade(Reader.class);
+                ReaderFacade readerFacade = new ReaderFacade();
                 
                 try {
                     readerFacade.edit(reader);
@@ -113,7 +113,7 @@ public class TabEditReaderComponents extends JPanel{
         lastNameComponent.getEditor().setText("");
         phoneComponent.getEditor().setText("");
         infoComponent.getInfo().setText("");
-        ReaderFacade readerFacade = new ReaderFacade(Reader.class);
+        ReaderFacade readerFacade = new ReaderFacade();
         List<Reader> readers = readerFacade.findAll();
         DefaultComboBoxModel<Reader> defaultComboBoxModel = new DefaultComboBoxModel<>();
         for (Reader reader : readers) {

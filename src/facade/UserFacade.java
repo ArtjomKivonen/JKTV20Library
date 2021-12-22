@@ -5,9 +5,8 @@
  */
 package facade;
 
-import entity.Book;
-import java.util.ArrayList;
-import java.util.List;
+import entity.Reader;
+import entity.User;
 import javax.persistence.EntityManager;
 import tools.Singleton;
 
@@ -15,12 +14,10 @@ import tools.Singleton;
  *
  * @author Melnikov
  */
-public class BookFacade extends AbstractFacade<Book>{
-
+public class UserFacade extends AbstractFacade<User>{
     private EntityManager em;
-    
-    public BookFacade() {
-        super(Book.class);
+    public UserFacade() {
+        super(User.class);
         Singleton singleton = Singleton.getInstance();
         em = singleton.getEntityManager();
     }
@@ -28,16 +25,6 @@ public class BookFacade extends AbstractFacade<Book>{
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    public List<Book> fingEnabledBook() {
-        try {
-            return em.createQuery("SELECT b FROM Book b WHERE b.count > 0")
-                    .getResultList();
-        } catch (Exception e) {
-            return new ArrayList<>();
-        }
-        
     }
     
 }

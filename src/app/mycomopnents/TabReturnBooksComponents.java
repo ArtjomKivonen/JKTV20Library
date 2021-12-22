@@ -73,7 +73,7 @@ public class TabReturnBooksComponents extends JPanel{
 
     public void addComboBoxModel() {
         infoComponent.getInfo().setText("");
-        ReaderFacade readerFacade = new ReaderFacade(Reader.class);
+        ReaderFacade readerFacade = new ReaderFacade();
         List<Reader> readers = readerFacade.findAll();
         DefaultComboBoxModel<Reader> defaultComboBoxModel = new DefaultComboBoxModel<>();
         for (Reader reader : readers) {

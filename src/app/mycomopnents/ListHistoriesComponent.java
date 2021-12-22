@@ -5,6 +5,7 @@
  */
 package app.mycomopnents;
 
+import app.GuiApp;
 import entity.Author;
 import entity.Book;
 import entity.History;
@@ -42,13 +43,13 @@ public class ListHistoriesComponent extends JPanel{
     }
 
     private void initComponents(String text, int widthWindow, int heightPanel, int listWidth) {
-        this.setPreferredSize(new Dimension(widthWindow,heightPanel));
+        this.setPreferredSize(new Dimension(widthWindow -25,heightPanel));
         this.setMinimumSize(this.getPreferredSize());
         this.setMaximumSize(this.getPreferredSize());
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 //        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         caption = new JLabel(text);
-        caption.setPreferredSize(new Dimension(widthWindow/3,27));
+        caption.setPreferredSize(new Dimension(widthWindow,27));
         caption.setMinimumSize(caption.getPreferredSize());
         caption.setMaximumSize(caption.getPreferredSize());
 //        caption.setBorder(BorderFactory.createLineBorder(Color.yellow));
@@ -64,7 +65,7 @@ public class ListHistoriesComponent extends JPanel{
         list.setLayoutOrientation (JList.HEIGHT);
         
         JScrollPane scrollPane = new JScrollPane(list);
-        scrollPane.setPreferredSize(new Dimension(listWidth, 120));
+        scrollPane.setPreferredSize(new Dimension(GuiApp.WITH_WINDOWS-25, heightPanel));
         scrollPane.setMaximumSize(scrollPane.getPreferredSize());
         scrollPane.setMinimumSize(scrollPane.getPreferredSize());
         scrollPane.setAlignmentX(LEFT_ALIGNMENT);
@@ -78,7 +79,7 @@ public class ListHistoriesComponent extends JPanel{
         if (reader == null) {
           return new DefaultListModel<>();
         }
-        HistoryFacade historyFacade = new HistoryFacade(History.class);
+        HistoryFacade historyFacade = new HistoryFacade();
         List<History> histories=null;
 
         histories = historyFacade.findAll(reader);
