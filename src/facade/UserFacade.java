@@ -26,5 +26,16 @@ public class UserFacade extends AbstractFacade<User>{
     protected EntityManager getEntityManager() {
         return em;
     }
+    public User find(String login) {
+      try {
+        return (User) em.createQuery("SELECT u FROM User u WHERE u.login = :login")
+            .setParameter("login", login)
+            .getSingleResult();
+      } catch (Exception e) {
+        return null;
+      }
+
+    }
     
+
 }

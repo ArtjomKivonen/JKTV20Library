@@ -9,6 +9,7 @@ import entity.Reader;
 import entity.Role;
 import entity.User;
 import entity.UserRoles;
+import java.util.List;
 import javax.persistence.EntityManager;
 import tools.Singleton;
 
@@ -28,5 +29,24 @@ public class UserRolesFacade extends AbstractFacade<UserRoles>{
     protected EntityManager getEntityManager() {
         return em;
     }
+
+  public String topRole(User user) {
+    try {
+      List<String> roles = em.createQuery("SELECT ur.role.roleName FROM UserRoles ur WHERE ur.user = :user")
+              .setParameter("user", user)
+              .getResultList();
+      if(roles.contains("ADMINISTRATOR")){
+        return "ADMINISTRATOR";
+      }else if(roles.contains("MANAGER")){
+        return "MANAGER";
+      }else if(roles.contains("READER")){
+        return "READER";
+      }else{
+        return "";
+      }
+    } catch (Exception e) {
+      return "";
+    }
+  }
     
 }
